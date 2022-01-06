@@ -1,1 +1,2 @@
-*.pyc
+UI/__pycache__
+runs/
