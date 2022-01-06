@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="Labe_type">
     <property name="geometry">
      <rect>
       <x>580</x>
@@ -27,7 +27,7 @@
      <string>Type: Fracture</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="label_CurrentImageEva">
     <property name="geometry">
      <rect>
       <x>580</x>
@@ -40,7 +40,7 @@
      <string>Current Image:</string>
     </property>
    </widget>
-   <widget class="QSlider" name="horizontalSlider">
+   <widget class="QSlider" name="ImageSwitcher">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -53,7 +53,7 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView_5">
+   <widget class="QGraphicsView" name="ResultImage_heatmap">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -63,7 +63,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="OpenImageFolder">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -75,8 +75,11 @@
     <property name="text">
      <string>Open Image Folder</string>
     </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label_result">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -89,7 +92,7 @@
      <string>Result</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="label_predict">
     <property name="geometry">
      <rect>
       <x>580</x>
@@ -102,7 +105,7 @@
      <string>Predict:</string>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView_2">
+   <widget class="QGraphicsView" name="ResultImage">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -112,7 +115,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView_3">
+   <widget class="QGraphicsView" name="OriginalImage_cropped">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -122,7 +125,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView_4">
+   <widget class="QGraphicsView" name="ResultImage_cropped">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -132,7 +135,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="Predict">
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -145,7 +148,7 @@
      <string>Fracture</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="label_FolderImageEva">
     <property name="geometry">
      <rect>
       <x>580</x>
@@ -158,7 +161,7 @@
      <string>Folder (mean):</string>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QGraphicsView" name="OriginalImage">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -167,8 +170,17 @@
       <height>192</height>
      </rect>
     </property>
+    <property name="backgroundBrush">
+     <brush brushstyle="NoBrush">
+      <color alpha="255">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </brush>
+    </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_image">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -181,7 +193,7 @@
      <string>Image</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="DetectScaphoid">
     <property name="geometry">
      <rect>
       <x>280</x>
@@ -194,7 +206,7 @@
      <string>Detect Scaphoid</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="ClassifyNDetectFracture">
     <property name="geometry">
      <rect>
       <x>500</x>
