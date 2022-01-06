@@ -16,6 +16,7 @@ results = model(imgs)  # includes NMS
 # Results
 results.print()
 results.save()
+crops = results.crop(save=True)  # cropped detections dictionary
 # results.show()
 print('\n===img1 predictions (tensor)===')
 print(results.xyxy[0])  # img1 predictions (tensor)
