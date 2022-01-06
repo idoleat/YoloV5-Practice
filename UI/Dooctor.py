@@ -3,14 +3,14 @@ from PyQt5.QtWidgets import QApplication
 import sys
 import Dooctor_UI
 
-class ExampleApp(QtWidgets.QMainWindow, Dooctor_UI.Ui_MainWindow):
+class Dooctor(QtWidgets.QMainWindow, Dooctor_UI.Ui_MainWindow):
     def __init__(self, parent=None):
-        super(ExampleApp, self).__init__(parent)
+        super(Dooctor, self).__init__(parent)
         self.setupUi(self)
 
 def main():
     app = QApplication(sys.argv)
-    form = ExampleApp()
+    form = Dooctor()
     form.show()
     app.exec_()
 
