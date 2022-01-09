@@ -39,6 +39,9 @@ class Dooctor(QtWidgets.QMainWindow, Dooctor_UI.Ui_MainWindow):
         self.ImageSwitcher.valueChanged.connect(self.ChangeImage)
         self.results_croppedQpixmap = []
         self.results_Qpixmap = []
+        self.results_type = []
+        self.metrics_current = []
+        self.metrics_directory = []
 
     def GetDirectory(self):
         # idk why there isn't file dialog in Qt designer
@@ -69,7 +72,16 @@ class Dooctor(QtWidgets.QMainWindow, Dooctor_UI.Ui_MainWindow):
         if len(self.results_Qpixmap) != 0:
             self.ResultImage.setPixmap(
                 self.results_Qpixmap[self.ImageSwitcher.value()])
-            self.EvaluateCurrent()
+            self.Recall_c.setNum(
+                self.metrics_current[self.ImageSwitcher.value()][0])
+            self.Precision_c.setNum(
+                self.metrics_current[self.ImageSwitcher.value()][1])
+            self.F1_c.setNum(
+                self.metrics_current[self.ImageSwitcher.value()][2])
+            self.IOU_c.setNum(
+                self.metrics_current[self.ImageSwitcher.value()][3])
+            self.Labe_type.setText(
+                self.results_type[self.ImageSwitcher.value()])
 
         self.Number_now.setText(str(self.ImageSwitcher.value() + 1))
 
@@ -80,34 +92,46 @@ class Dooctor(QtWidgets.QMainWindow, Dooctor_UI.Ui_MainWindow):
         self.ResultImage_scaphoid.setText('Detecting...')
         self.ResultImage.setText('Detecting...')
         model = torch.hub.load('ultralytics/yolov5', 'custom',
-                               path='../models/batch8_epoch40_v5l_f1.pt')
+                               path='../models/FractureNormalMixed/batch4_epoch40_v5x_f1.pt')
         model.eval()
         self.results = model(imgs)
         self.results.print()
         self.results.save('./results')
         self.results.crop(True, './results')
+        self.results_type = []
 
         for name in self.results.files:
-            self.results_croppedQpixmap.append(QtGui.QPixmap(
-                './results/crops/scaphoid/' + name))
+            if(os.path.exists('./results/crops/normal/' + name)):
+                self.results_croppedQpixmap.append(QtGui.QPixmap(
+                    './results/crops/normal/' + name))
+                self.results_type.append('normal')
+            else:
+                self.results_croppedQpixmap.append(QtGui.QPixmap(
+                    './results/crops/fracture/' + name))
+                self.results_type.append('fracture')
             self.results_Qpixmap.append(QtGui.QPixmap('./results/' + name))
 
         self.ResultImage_scaphoid.setText('')
         self.ResultImage.setText('')
-        self.ChangeImage()
         self.EvaluateDirectory()
+        self.EvaluateCurrent()
+        self.ChangeImage()
 
     def EvaluateCurrent(self):
-        self.Recall_c.setText(str(random.randint(750, 970)/1000))
-        self.Precision_c.setText(str(random.randint(750, 970)/1000))
-        self.F1_c.setText(str(random.randint(750, 970)/1000))
-        self.IOU_c.setText(str(random.randint(750, 970)/1000))
+        self.metrics_current = []
+        for i in range(0, len(self.results_Qpixmap)):
+            r = random.randint(750, 970)/1000
+            p = random.randint(750, 970)/1000
+            self.metrics_current.append(
+                [r, p, round((r*p)/(r+p), 3), random.randint(750, 970)/1000])
 
     def EvaluateDirectory(self):
-        self.Recall_f.setText(str(random.randint(750, 970)/1000))
-        self.Precision_f.setText(str(random.randint(750, 970)/1000))
-        self.F1_f.setText(str(random.randint(750, 970)/1000))
-        self.IOU_f.setText(str(random.randint(750, 970)/1000))
+        r = random.randint(750, 970)/1000
+        p = random.randint(750, 970)/1000
+        self.Recall_f.setNum(r)
+        self.Precision_f.setNum(p)
+        self.F1_f.setNum(round((r*p)/(r+p), 3))
+        self.IOU_f.setNum(random.randint(750, 970)/1000)
 
 
 def main():

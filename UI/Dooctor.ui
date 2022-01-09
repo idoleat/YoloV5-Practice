@@ -17,14 +17,14 @@
    <widget class="QLabel" name="Labe_type">
     <property name="geometry">
      <rect>
-      <x>570</x>
+      <x>610</x>
       <y>100</y>
       <width>111</width>
       <height>19</height>
      </rect>
     </property>
     <property name="text">
-     <string>Type: Fracture</string>
+     <string>frac?</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_CurrentImageEva">
@@ -542,6 +542,19 @@
     </property>
     <property name="text">
      <string>777</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>100</y>
+      <width>66</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Type:</string>
     </property>
    </widget>
   </widget>

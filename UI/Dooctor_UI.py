@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Labe_type = QtWidgets.QLabel(self.centralwidget)
-        self.Labe_type.setGeometry(QtCore.QRect(570, 100, 111, 19))
+        self.Labe_type.setGeometry(QtCore.QRect(610, 100, 111, 19))
         self.Labe_type.setObjectName("Labe_type")
         self.label_CurrentImageEva = QtWidgets.QLabel(self.centralwidget)
         self.label_CurrentImageEva.setGeometry(QtCore.QRect(560, 210, 111, 19))
@@ -149,6 +149,9 @@ class Ui_MainWindow(object):
         self.Number_total = QtWidgets.QLabel(self.centralwidget)
         self.Number_total.setGeometry(QtCore.QRect(670, 530, 66, 19))
         self.Number_total.setObjectName("Number_total")
+        self.label_9 = QtWidgets.QLabel(self.centralwidget)
+        self.label_9.setGeometry(QtCore.QRect(550, 100, 66, 19))
+        self.label_9.setObjectName("label_9")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 821, 24))
@@ -165,7 +168,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.Labe_type.setText(_translate("MainWindow", "Type: Fracture"))
+        self.Labe_type.setText(_translate("MainWindow", "frac?"))
         self.label_CurrentImageEva.setText(_translate("MainWindow", "Current Image:"))
         self.OpenImageFolder.setText(_translate("MainWindow", "Open Image Folder"))
         self.label_result.setText(_translate("MainWindow", "Result"))
@@ -197,3 +200,4 @@ class Ui_MainWindow(object):
         self.label_20.setText(_translate("MainWindow", "Precision"))
         self.Number_now.setText(_translate("MainWindow", "77"))
         self.Number_total.setText(_translate("MainWindow", "777"))
+        self.label_9.setText(_translate("MainWindow", "Type:"))
