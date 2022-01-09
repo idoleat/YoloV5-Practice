@@ -63,28 +63,12 @@ class Dooctor(QtWidgets.QMainWindow, Dooctor_UI.Ui_MainWindow):
                                path='../models/batch8_epoch40_v5l_f1.pt')
         self.results = model(imgs)
         self.results.print()
-        self.results.save('./results')
+        self.results.crop(True, './results')
 
-        loadedQPixmap = []
-        imagesList = os.listdir('./results')
-        for image in imagesList:
-            if os.path.isdir('./results/' + image):
-                continue
-            loadedQPixmap.append(QtGui.QPixmap('./results/' + image))
+        for name in self.results.files:
+            self.results_croppedQpixmap.append(QtGui.QPixmap(
+                './results/crops/scaphoid/' + name))
 
-        index = 0
-        for img in loadedQPixmap:
-            ax = self.results.pandas().xyxy[index].xmin[0]
-            ay = self.results.pandas().xyxy[index].ymin[0]
-            awidth = self.results.pandas(
-            ).xyxy[index].xmax[0] - self.results.pandas().xyxy[index].xmin[0]
-            aheight = self.results.pandas(
-            ).xyxy[index].ymax[0] - self.results.pandas().xyxy[index].ymax[0]
-
-            cropped = img.copy(ax, ay, awidth, aheight)
-            self.results_croppedQpixmap.append(cropped)
-            index += 1
-            print('yoooo--')
         self.ResultImage_scaphoid.setText('')
         self.ChangeImage()
 
