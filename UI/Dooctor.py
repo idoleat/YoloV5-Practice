@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QFileDialog
 from PIL import Image
+import functools
 import torch
 import os
 import sys
@@ -10,20 +11,15 @@ import Dooctor_UI
 def LoadImages(path):
     imagesList = os.listdir(path)
     loadedImages = []
+    loadedQPixmap = []
     for image in imagesList:
         if os.path.isdir(path + '/' + image):
             continue
-        loadedImages.append(QtGui.QPixmap(path + '/' + image))
+        img = Image.open(path + '/' + image)
+        loadedImages.append(img)
+        loadedQPixmap.append(QtGui.QPixmap(path + '/' + image))
 
-    return loadedImages
-
-
-def ScaphoidDetection(imgs):
-    model = torch.hub.load('ultralytics/yolov5', 'custom',
-                           path='./models/batch8_epoch40_v5l_f1.pt')
-    results = model(imgs)
-
-    return results
+    return loadedImages, loadedQPixmap
 
 
 class Dooctor(QtWidgets.QMainWindow, Dooctor_UI.Ui_MainWindow):
@@ -40,14 +36,26 @@ class Dooctor(QtWidgets.QMainWindow, Dooctor_UI.Ui_MainWindow):
 
         if dialog.exec_():
             dirPath = dialog.selectedFiles()
-            self.imgs = LoadImages(dirPath[0])
-            self.OriginalImage.setPixmap(self.imgs[self.ImageSwitcher.value()])
-            self.ImageSwitcher.setMaximum(len(self.imgs) - 1)
+            self.imgs, self.Qpixmaps = LoadImages(dirPath[0])
+            self.ImageSwitcher.setMaximum(len(self.Qpixmaps) - 1)
+            self.ChangeImage()
+            self.ClassifyNDetectFracture.clicked.connect(
+                functools.partial(self.ScaphoidDetection, self.imgs))
 
     def ChangeImage(self):
-        if self.ImageSwitcher.value() > len(self.imgs) - 1:
+        if self.ImageSwitcher.value() > len(self.Qpixmaps) - 1 or self.ImageSwitcher.value() < 0:
             return
-        self.OriginalImage.setPixmap(self.imgs[self.ImageSwitcher.value()])
+        self.OriginalImage.setPixmap(self.Qpixmaps[self.ImageSwitcher.value()])
+
+    def ScaphoidDetection(self, imgs):
+        if len(imgs) < 0:
+            return
+
+        model = torch.hub.load('ultralytics/yolov5', 'custom',
+                               path='../models/batch8_epoch40_v5l_f1.pt')
+        self.results = model(imgs)
+        self.results.print()
+        self.croppedImg = self.results.crop()
 
 
 def main():
