@@ -1,12 +1,9 @@
-# YoloV5-Practice
-
-Practicing using Yolo V5 to detect scaphoid
+# YoloV5-Qt-Practice
+Practicing using Yolo V5 to detect scaphoid with trash like user interface made with PyQt
 
 ## Depencies
-
-`PyQt5` and `Pytorch` python packages are needed. `Pytorch` version: 1.10,
-`CUDA` version: 1.11, `python` version 3.7 (TAs don't use Arch Linux so they
-stay at 3.7)
+`PyQt5` and `Pytorch` python packages are needed. 
+`Pytorch` version 1.10, `CUDA` version 1.11, `python` version 3.7 (TAs don't use Arch Linux so they stay at 3.7)
 
 ## How to run
 
@@ -17,6 +14,5 @@ stay at 3.7)
    play TF2? Go play it and you'll understand me!
 
 ## Notes
-
 - Model v5x trained with batch 4 and epoch 40. v5s or v5l may need more epochs.
 - To fix my wonderful user interface, use Qt designer to open `UI/Dooctor.ui`
